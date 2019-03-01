@@ -1,18 +1,22 @@
 package com.pentil.pen_tix.Retrofit;
 
+
+
 import com.pentil.pen_tix.Return.Detail.RetuenDetail;
 import com.pentil.pen_tix.Return.Genre.ReturnGenre;
 import com.pentil.pen_tix.Return.Movie.ReturnPlay;
 import com.pentil.pen_tix.Return.Soon.ReturnSoon;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface  Client {
     @GET("genre/list")
-    Call<ReturnGenre> genre(
+    Observable<ReturnGenre> genre(
             @Query("api_key") String api_key
     );
 
@@ -22,7 +26,7 @@ public interface  Client {
     );
 
     @GET("movie/{path}")
-    Call<RetuenDetail> movie(
+    Observable<Response<RetuenDetail>> movie(
             @Path("path") String id_move,
             @Query("api_key") String api_key,
             @Query("append_to_response") String append
@@ -30,7 +34,7 @@ public interface  Client {
     );
 
     @GET("discover/movie")
-    Call<ReturnSoon> soon(
+    Observable<ReturnSoon> soon(
             @Query("api_key") String api_key,
             @Query("primary_release_date.gte") String date
     );

@@ -22,6 +22,11 @@ import com.pentil.pen_tix.Return.Genre.ReturnGenre;
 
 import java.util.List;
 
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +35,7 @@ public class Splash extends AppCompatActivity {
     AppPreference appPreference;
     Boolean aBoolean;
     ProgressBar progressBar;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
     double progress;
     double maxprogress = 100;
     GenreHepler genreHepler;
@@ -50,10 +56,37 @@ public class Splash extends AppCompatActivity {
             public void run() {
                 // Do something after 5s = 5000ms
                 progressBar.setProgress(30);
-                new Load().execute();
+//                new Load().execute();
+                loaddata();
             }
         }, 2000);
 
+    }
+
+    public void loaddata()
+    {
+        Client api = Server.builder().create(Client.class);
+        appPreference = new AppPreference(Splash.this);
+        if (appPreference.getFirstRun())
+        {
+            compositeDisposable.add(api.genre(BuildConfig.TMDB_API_KEY).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<ReturnGenre>() {
+                @Override
+                public void accept(ReturnGenre returnGenre) throws Exception {
+                        List<Genre> genres = returnGenre.getGenres();
+                        com.pentil.pen_tix.DatabaseGenre.Genre genre;
+                        for (int i =0 ; i<genres.size();i++)
+                        {
+                            genre = new com.pentil.pen_tix.DatabaseGenre.Genre();
+                            genre.setGenre(genres.get(i).getName());
+                            genre.setId_genre(genres.get(i).getId());
+                            genreHepler.insert(genre);
+                        }
+                }
+            }));
+        }
+        Intent i = new Intent(Splash.this, MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
     private class Load extends AsyncTask<Void, Integer, Void>{
@@ -79,27 +112,27 @@ public class Splash extends AppCompatActivity {
             if (aBoolean)
             {
                 Client api = Server.builder().create(Client.class);
-                Call<ReturnGenre> cari = api.genre(BuildConfig.TMDB_API_KEY);
-                cari.enqueue(new Callback<ReturnGenre>() {
-                    @Override
-                    public void onResponse(Call<ReturnGenre> call, Response<ReturnGenre> response) {
-                        List<Genre> genres = response.body().getGenres();
-                        com.pentil.pen_tix.DatabaseGenre.Genre genre;
-                        for (int i =0 ; i<genres.size();i++)
-                        {
-                            genre = new com.pentil.pen_tix.DatabaseGenre.Genre();
-                            genre.setGenre(genres.get(i).getName());
-                            genre.setId_genre(genres.get(i).getId());
-                            genreHepler.insert(genre);
-                        }
-                        Log.d("test", "doInBackground: "+ genreHepler.query().size());
-                    }
-
-                    @Override
-                    public void onFailure(Call<ReturnGenre> call, Throwable t) {
-
-                    }
-                });
+//                Call<ReturnGenre> cari = api.genre(BuildConfig.TMDB_API_KEY);
+//                cari.enqueue(new Callback<ReturnGenre>() {
+//                    @Override
+//                    public void onResponse(Call<ReturnGenre> call, Response<ReturnGenre> response) {
+//                        List<Genre> genres = response.body().getGenres();
+//                        com.pentil.pen_tix.DatabaseGenre.Genre genre;
+//                        for (int i =0 ; i<genres.size();i++)
+//                        {
+//                            genre = new com.pentil.pen_tix.DatabaseGenre.Genre();
+//                            genre.setGenre(genres.get(i).getName());
+//                            genre.setId_genre(genres.get(i).getId());
+//                            genreHepler.insert(genre);
+//                        }
+//                        Log.d("test", "doInBackground: "+ genreHepler.query().size());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ReturnGenre> call, Throwable t) {
+//
+//                    }
+//                });
             }
             progressBar.setProgress(70);
             appPreference.setFirstRun(false);

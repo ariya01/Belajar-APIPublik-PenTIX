@@ -21,7 +21,12 @@ public class RetuenDetail {
     String rating;
     @SerializedName("original_language")
     String language;
+    @SerializedName("casts")
+    CastObject castObject;
 
+    public CastObject getCastObject() {
+        return castObject;
+    }
 
     public String getRating() {
         return rating;
