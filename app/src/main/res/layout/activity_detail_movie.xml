@@ -60,8 +60,7 @@
                             android:textSize="10dp"
                             android:textColor="@color/pudar"
                             android:layout_marginTop="10dp"
-                            android:id="@+id/genreandduration"
-                            android:text="Genre / Genre - 1 hours 37 Minutes"/>
+                            android:id="@+id/genreandduration"/>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -70,12 +69,10 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-
                                 android:orientation="vertical">
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="60%"
                                     android:id="@+id/valuerating"
                                     android:textColor="@android:color/white"
                                     android:textSize="15sp"
@@ -96,7 +93,6 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="en"
                                     android:id="@+id/valuelanguage"
                                     android:textColor="@android:color/white"
                                     android:textSize="15sp"
@@ -116,7 +112,6 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="No"
                                     android:id="@+id/valueadult"
                                     android:textColor="@android:color/white"
                                     android:textSize="15sp"
@@ -188,12 +183,21 @@
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="@string/over"
                    android:id="@+id/overview"
                    android:textColor="@android:color/white"
                    android:textSize="12sp"
                    android:layout_marginLeft="5dp"
                    android:layout_marginTop="10dp" />
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="Cast"
+                   android:textStyle="bold"
+                   android:textColor="@android:color/white"
+                   android:textSize="18sp"
+                   android:layout_marginTop="10dp"
+                   android:gravity="center"
+                   android:layout_marginBottom="20dp"/>
                <android.support.v7.widget.RecyclerView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -202,4 +206,10 @@
            </LinearLayout>
        </ScrollView>
     </LinearLayout>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"
+        android:indeterminateDrawable="@drawable/progress"/>
 </RelativeLayout>

@@ -123,14 +123,7 @@ public class PlayingNowFragment extends Fragment implements DiscreteScrollView.O
         {
             titile.setText(movie.getTitle());
         }
-        if (movie.getGenre2().equals("")||movie.getGenre2()==null)
-        {
-            genre1.setText(movie.getGenre1());
-        }
-        else
-        {
-            genre1.setText(movie.getGenre1()+" / "+movie.getGenre2());
-        }
+        genre1.setText(movie.getGenre1());
         numberrating.setText(movie.getRating());
         valuelanguage.setText(movie.getBahasa());
         linearLayout.setOnClickListener(new View.OnClickListener() {

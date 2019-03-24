@@ -3,6 +3,7 @@ package com.pentil.pen_tix.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import com.pentil.pen_tix.R;
 import com.pentil.pen_tix.Return.Detail.Cast;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdapteCast extends RecyclerView.Adapter<AdapteCast.Holder> {
     List<Cast> casts;
@@ -28,9 +31,19 @@ public class AdapteCast extends RecyclerView.Adapter<AdapteCast.Holder> {
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int i) {
-        Glide.with(holder.itemView.getContext())
-                .load("https://image.tmdb.org/t/p/w500"+casts.get(i).getPath())
-                .into(holder.imageView);
+        Log.d("cek123", "onBindViewHolder: "+casts.get(i).getPath());
+        if (casts.get(i).getPath()!=null)
+        {
+            Glide.with(holder.itemView.getContext())
+                    .load("https://image.tmdb.org/t/p/w500"+casts.get(i).getPath())
+                    .into(holder.imageView);
+        }
+        else
+        {
+            Glide.with(holder.itemView.getContext())
+                    .load(R.drawable.place_holder)
+                    .into(holder.imageView);
+        }
     }
 
     @Override
@@ -44,7 +57,7 @@ public class AdapteCast extends RecyclerView.Adapter<AdapteCast.Holder> {
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+        CircleImageView imageView;
         public Holder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.gambar);

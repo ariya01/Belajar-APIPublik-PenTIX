@@ -23,6 +23,12 @@ public class RetuenDetail {
     String language;
     @SerializedName("casts")
     CastObject castObject;
+    @SerializedName("overview")
+    String overview;
+
+    public String getOverview() {
+        return overview;
+    }
 
     public CastObject getCastObject() {
         return castObject;
