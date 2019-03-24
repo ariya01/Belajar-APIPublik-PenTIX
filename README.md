@@ -33,3 +33,7 @@ Library dan Alat bantu yang digunkan:
 8. OkHttp
 9. yarolegovich:discrete-scrollview
 10. devendroid:ReadMoreOption
+
+Download
+
+[<img src="https://raw.githubusercontent.com/ariya01/Belajar-APIPublik-PenTIX/master/pic/google%20play.png">](https://play.google.com/store/apps/details?id=com.pentilmis.pen_tix)
