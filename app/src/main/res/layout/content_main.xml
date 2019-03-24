@@ -22,7 +22,7 @@
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
     </android.support.design.widget.TabLayout>
 
-    <com.pentil.pen_tix.Activity.LockableViewPager
+    <com.pentilmis.pen_tix.Activity.LockableViewPager
         android:id="@+id/viewpager"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
